@@ -1,0 +1,10 @@
+{
+  "optionSet" : {
+    "BazelPath" : {
+      "p" : "/Users/ksmiley/dev/lyft/envoy-mobile/bazelw"
+    },
+    "WorkspaceRootPath" : {
+      "p" : "/Users/ksmiley/dev/lyft/envoy-mobile"
+    }
+  }
+}
