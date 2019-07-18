@@ -6,8 +6,8 @@ load("@build_bazel_rules_swift//swift:swift.bzl", "swift_test")
 envoy_package()
 
 swift_test(
-    name = "sample_test",
+    name = "retry_policy_tests",
     srcs = [
-        "SampleTest.swift",
+        "RetryPolicyTests.swift",
     ],
 )
