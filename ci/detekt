@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# TODO provision with Bazel
+readonly version="1.0.0-RC16"
+readonly detekt_jar_name="detekt-cli-$version-all.jar"
+readonly formatting_jar_name="detekt-formatting-$version.jar"
+readonly detekt_jar_file="$TMPDIR/$detekt_jar_name"
+readonly formatting_jar_file="$TMPDIR/$formatting_jar_name"
+
+if [[ ! -f "$detekt_jar_file" ]]; then
+    curl \
+        --fail \
+        --location \
+        --output "$detekt_jar_file" \
+        "https://github.com/arturbosch/detekt/releases/download/$version/$detekt_jar_name"
+fi
+
+if [[ ! -f "$formatting_jar_file" ]]; then
+    curl \
+        --fail \
+        --location \
+        --output "$formatting_jar_file" \
+        "https://repo1.maven.org/maven2/io/gitlab/arturbosch/detekt/detekt-formatting/$version/$formatting_jar_name"
+fi
+
+java \
+    -jar "$detekt_jar_file" \
+    --plugins "$formatting_jar_file" \
+    --build-upon-default-config \
+    -c .kotlinlint.yml \
+    -i examples/kotlin/hello_world
+
