@@ -15,13 +15,12 @@ except ImportError:  # python 2
 
 _USER_CREDS = os.environ.get("READWRITE_USER", "")
 _KEY_CREDS = os.environ.get("READWRITE_API_KEY", "")
-_ARTIFACT_HOST_URL = os.environ["ARTIFACT_HOST_URL"]
+_MAVEN_REPOSITORY_URL = os.environ["MAVEN_REPOSITORY_URL"]
 
 _GROUP_ID = "io.envoyproxy.envoymobile"
 _ARTIFACT_ID = "envoy-mobile"
-_BASE_URL = "{}/io/envoyproxy/envoymobile".format(_ARTIFACT_HOST_URL)
-_LOCAL_INSTALL_PATH = os.path.expanduser("~/.m2/repository/io/envoyproxy/envoymobile/{}".format(_ARTIFACT_ID))
-
+_BASE_URL = "{}/io/envoyproxy/envoymobile".format(_MAVEN_REPOSITORY_URL)
+_LOCAL_INSTALL_PATH = os.path.expanduser("{}/.m2/repository/io/envoyproxy/envoymobile/{}".format(os.environ.get("HOME"), _ARTIFACT_ID))
 
 def _upload(target, version):
     aar = target + ".aar"
