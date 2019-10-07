@@ -42,6 +42,14 @@ touch $@
     stamp = True,
 )
 
+genrule(
+    name = "android_javadoc",
+    srcs = [ "library/java/src/io/envoyproxy/envoymobile/engine/AndroidEngineImpl.java" ],
+    # java -jar ~/Downloads/dokka-fatjar-0.9.18.jar $(SRCS) -output javadoc-dir && jar cf $(OUTS) -C javadoc-dir . &&
+    cmd = "echo '$(SRCS)' > $(OUTS)",
+    outs = ["android-javadoc.jar"],
+)
+
 define_kt_toolchain(
     name = "kotlin_toolchain",
     jvm_target = "1.8",
